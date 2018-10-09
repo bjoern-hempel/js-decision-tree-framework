@@ -10,9 +10,28 @@
 
         var decisionTree = new DecisionTree();
 
-        console.log(decisionTree.entropy(100, 100));
-        console.log(decisionTree.gini(100, 100));
-        console.log(decisionTree.classificationError(100, 100));
+        var typeOfCustomer    = decisionTree.addClassSet('typeOfCustomer',    ['newCustomer', 'existingCustomer', 'normalCustomer']);
+        var paymentRate       = decisionTree.addClassSet('paymentRate',       ['low', 'normal', 'high']);
+        var purchaseFrequency = decisionTree.addClassSet('purchaseFrequency', ['low', 'normal', 'high']);
+        var source            = decisionTree.addClassSet('source',            ['abroad', 'inland']);
+        var billType          = decisionTree.addClassSet('billType',          ['bill', 'creditCard']);
+
+        decisionTree.addRecord(typeOfCustomer.newCustomer,      paymentRate.low,    purchaseFrequency.low,  source.inland, billType.creditCard);
+        decisionTree.addRecord(typeOfCustomer.newCustomer,      paymentRate.low,    purchaseFrequency.low,  source.abroad, billType.creditCard);
+        decisionTree.addRecord(typeOfCustomer.existingCustomer, paymentRate.low,    purchaseFrequency.low,  source.inland, billType.bill);
+        decisionTree.addRecord(typeOfCustomer.normalCustomer,   paymentRate.normal, purchaseFrequency.low,  source.inland, billType.bill);
+        decisionTree.addRecord(typeOfCustomer.normalCustomer,   paymentRate.high,   purchaseFrequency.high, source.inland, billType.bill);
+        decisionTree.addRecord(typeOfCustomer.normalCustomer,   paymentRate.high,   purchaseFrequency.high, source.abroad, billType.creditCard);
+        decisionTree.addRecord(typeOfCustomer.existingCustomer, paymentRate.high,   purchaseFrequency.high, source.abroad, billType.bill);
+        decisionTree.addRecord(typeOfCustomer.newCustomer,      paymentRate.normal, purchaseFrequency.low,  source.inland, billType.creditCard);
+        decisionTree.addRecord(typeOfCustomer.newCustomer,      paymentRate.high,   purchaseFrequency.high, source.inland, billType.bill);
+        decisionTree.addRecord(typeOfCustomer.normalCustomer,   paymentRate.normal, purchaseFrequency.high, source.inland, billType.bill);
+        decisionTree.addRecord(typeOfCustomer.newCustomer,      paymentRate.normal, purchaseFrequency.high, source.abroad, billType.bill);
+        decisionTree.addRecord(typeOfCustomer.existingCustomer, paymentRate.normal, purchaseFrequency.low,  source.abroad, billType.bill);
+        decisionTree.addRecord(typeOfCustomer.existingCustomer, paymentRate.low,    purchaseFrequency.high, source.inland, billType.bill);
+        decisionTree.addRecord(typeOfCustomer.normalCustomer,   paymentRate.normal, purchaseFrequency.low,  source.abroad, billType.creditCard);
+
+        console.log(decisionTree.records);
 
     </script>
 </body>

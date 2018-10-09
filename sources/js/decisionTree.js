@@ -25,7 +25,9 @@ class DecisionTree {
      * @version 1.0 (2018-10-08)
      */
     reset() {
-        this.var = 0;
+        this.classSets     = {};
+        this.classSetNames = [];
+        this.records       = [];
     }
 
     /**
@@ -118,6 +120,40 @@ class DecisionTree {
         var p_max = Math.max(...p);
 
         return 1 - p_max;
+    }
+
+    /**
+     * Adds a class set.
+     *
+     * @author Björn Hempel <bjoern@hempel.li>
+     * @version 1.0 (2018-10-09)
+     * @param classSet
+     */
+    addClassSet(name, classSet) {
+        var properties = {};
+
+        for (var i = 0; i < classSet.length; i++) {
+            properties[classSet[i]] = i;
+        }
+
+        this.classSets[name] = properties;
+
+        this.classSetNames.push(name);
+
+        return properties;
+    }
+
+    /**
+     * Adds a record to classify.
+     */
+    addRecord() {
+        var record = [];
+
+        for (var i = 0; i < arguments.length; i++) {
+            record.push(arguments[i]);
+        }
+
+        this.records.push(record);
     }
 
     /**
